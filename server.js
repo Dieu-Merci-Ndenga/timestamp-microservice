@@ -60,7 +60,7 @@ app.get('/api/:date', (req, res) => {
   const result = normalizeInput(req.params.date);
 
   if (!result) {
-    return res.json({ error: 'Invalid Date' });
+    return res.status(400).json({ error: 'Invalid Date' });
   }
 
   return res.json(result);
