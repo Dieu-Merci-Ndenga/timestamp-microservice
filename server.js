@@ -1,7 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// INDISPENSABLE pour que freeCodeCamp puisse interroger ton API depuis leur site
+app.use(cors({ optionsSuccessStatus: 200 }));
 
 function currentTimestamp() {
   const now = new Date();
@@ -14,11 +18,11 @@ function normalizeInput(value) {
   }
 
   const trimmed = String(value).trim();
-
   if (trimmed === '') {
     return currentTimestamp();
   }
 
+  // Si c'est uniquement des chiffres, on traite comme un timestamp Unix
   if (/^\d+$/.test(trimmed)) {
     const numericValue = Number(trimmed);
     const date = trimmed.length >= 13
@@ -46,11 +50,17 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get(['/api', '/api/:date?'], (req, res) => {
+// Route dédiée pour /api et /api/ sans paramètre
+app.get('/api', (req, res) => {
+  return res.json(currentTimestamp());
+});
+
+// Route dédiée pour /api/:date
+app.get('/api/:date', (req, res) => {
   const result = normalizeInput(req.params.date);
 
   if (!result) {
-    return res.status(400).json({ error: 'Invalid Date' });
+    return res.json({ error: 'Invalid Date' });
   }
 
   return res.json(result);
