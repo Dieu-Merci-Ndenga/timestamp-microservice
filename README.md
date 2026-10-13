@@ -4,6 +4,18 @@ A lightweight Express API that converts between Unix timestamps and UTC date str
 
 This project is designed to be easy to run locally and simple to integrate with front-end apps, tests, or third-party services.
 
+## Live demo
+
+Try the deployed API here:
+
+**[https://timestamp-microservice-8rg2.onrender.com](https://timestamp-microservice-8rg2.onrender.com)**
+
+Example live endpoints:
+
+- [Current timestamp](https://timestamp-microservice-8rg2.onrender.com/api)
+- [Convert a date](https://timestamp-microservice-8rg2.onrender.com/api/2015-12-15)
+- [Convert a Unix timestamp](https://timestamp-microservice-8rg2.onrender.com/api/1451001600000)
+
 ## Features
 
 - Convert date strings such as `2015-12-15` or `December 15, 2015`
@@ -23,11 +35,21 @@ If no date is provided, the server returns the current timestamp.
 
 ## Example requests
 
+### Local requests
+
 ```bash
 curl http://localhost:3000/api
 curl "http://localhost:3000/api/2015-12-15"
 curl "http://localhost:3000/api/December%2015,%202015"
 curl "http://localhost:3000/api/1451001600000"
+```
+
+### Live requests
+
+```bash
+curl https://timestamp-microservice-8rg2.onrender.com/api
+curl "https://timestamp-microservice-8rg2.onrender.com/api/2015-12-15"
+curl "https://timestamp-microservice-8rg2.onrender.com/api/1451001600000"
 ```
 
 ## Example responses
